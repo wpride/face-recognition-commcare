@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <corners
+        android:radius="2dp" />
+    <stroke
+        android:width="2dp"
+        android:color="@color/gray_300" />
+    <solid
+        android:color="@color/white_transparent_cc" />
+
+</shape>
+<!-- From: file:/Users/wpride1/face-recognition1/facerecognition/src/main/res/drawable/map_pan_buttons_container_background.xml -->

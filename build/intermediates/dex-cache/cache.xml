@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/classes-dd678a06cbc8c7eb936c2bf81c83b5f47b86e714.jar" />
+    </item>
+    <item
+        jar="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/classes-ec0d6c810e4ff0fb1854eb593b2a1e432f453d72.jar" />
+    </item>
+    <item
+        jar="/Users/wpride1/face-recognition1/facerecognition/libs/javacv.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1824ed7a180ee32aa57f5632a489c10aad8f1804">
+        <dex dex="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/javacv-5fbf6d1b348511941be6287a6d4ea658854b0005.jar" />
+    </item>
+    <item
+        jar="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-eb766b4c391b88ab91a5a32fc3a0139d414b7f5b.jar" />
+    </item>
+    <item
+        jar="/Users/wpride1/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-337b307ebd184e05ceba71ac5f8183ce56e87851.jar" />
+    </item>
+    <item
+        jar="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/exploded-aar/face-recognition1/openCVLibrary2410/unspecified/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01a940ebbc12e2563d2cc439f5f00dbfb555b509">
+        <dex dex="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/classes-20488f46b471759cb8e020a327f8c9b9b7592707.jar" />
+    </item>
+    <item
+        jar="/Users/wpride1/face-recognition1/facerecognition/libs/javacpp.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="08f8b1e3fdcc93a1e9076d6279864d6a46982a85">
+        <dex dex="/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/javacpp-0acb71a3164334ffe6eabc6925653f77304c569b.jar" />
+    </item>
+
+</items>

@@ -1,0 +1,42 @@
+<resources>
+
+    <style name="ActionButton">
+        <item name="android:minWidth">@dimen/action_button_min_width</item>
+    </style>
+
+    <style name="ActionButtonBlue" parent="ActionButtonColored">
+        <item name="android:background">@drawable/button_blue_background</item>
+    </style>
+
+    <style name="ActionButtonColored" parent="ActionButton">
+        <item name="android:textColor">@color/gray_300</item>
+    </style>
+
+    <style name="ActionButtonGreen" parent="ActionButtonColored">
+        <item name="android:background">@drawable/button_green_background</item>
+    </style>
+
+    <style name="ActionButtonOrange" parent="ActionButtonColored">
+        <item name="android:background">@drawable/button_orange_background</item>
+    </style>
+
+    <style name="ActionButtonRed" parent="ActionButtonColored">
+        <item name="android:background">@drawable/button_red_background</item>
+    </style>
+
+    <style name="ActionButtonWhite" parent="ActionButton">
+        <item name="android:background">@drawable/button_white_background</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <style name="MapPanButton">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_width">@dimen/map_pan_button_dimen</item>
+        <item name="android:layout_height">@dimen/map_pan_button_dimen</item>
+        <item name="android:src">@drawable/map_pan_button_arrow</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+</resources>
