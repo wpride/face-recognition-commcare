@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -96,18 +95,14 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
     private Tutorial3View   mOpenCvCameraView;
     private int mChooseCamera = backCam;
     
-    TextView textViewName;
-    TextView textresult;
+    TextView textViewState;
     Bitmap mBitmap;
     Handler mHandler;
   
     PersonRecognizer personRecognizer;
-    ToggleButton toggleButtonGrabar,toggleButtonTrain;
-    ImageView ivGreen,ivYellow,ivRed; 
+    ToggleButton toggleButtonGrabar;
     ImageButton imCamera;
     Button submitButton;
-    
-    TextView textState;
     com.googlecode.javacv.cpp.opencv_contrib.FaceRecognizer faceRecognizer;
 
     String action = "";
@@ -137,22 +132,11 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
 
         setContentView(R.layout.face_detect_surface_view);
 
-        textViewName = (TextView)findViewById(R.id.textViewName);
+        textViewState = (TextView)findViewById(R.id.textViewState);
         toggleButtonGrabar=(ToggleButton)findViewById(R.id.toggleButtonGrabar);
-        toggleButtonTrain=(ToggleButton)findViewById(R.id.toggleButton1);
-        textState= (TextView)findViewById(R.id.textViewState);
-        ivGreen=(ImageView)findViewById(R.id.imageView3);
-        ivYellow=(ImageView)findViewById(R.id.imageView4);
-        ivRed=(ImageView)findViewById(R.id.imageView2);
         imCamera=(ImageButton)findViewById(R.id.imageButton1);
         submitButton=(Button)findViewById(R.id.submitButton);
-        textresult = (TextView) findViewById(R.id.textView1);
-
-        ivGreen.setVisibility(View.INVISIBLE);
-        ivYellow.setVisibility(View.INVISIBLE);
-        ivRed.setVisibility(View.INVISIBLE);
-        textViewName.setVisibility(View.INVISIBLE);
-        textresult.setVisibility(View.INVISIBLE);
+        textViewState.setVisibility(View.VISIBLE);
 
         mOpenCvCameraView = (Tutorial3View) findViewById(R.id.tutorial3_activity_java_surface_view);
 
@@ -177,20 +161,23 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                 }
                 else
                 {
-                    textresult.setText(msg.obj.toString());
-                    ivGreen.setVisibility(View.INVISIBLE);
-                    ivYellow.setVisibility(View.INVISIBLE);
-                    ivRed.setVisibility(View.INVISIBLE);
+                    textViewState.setText(msg.obj.toString());
+                    textViewState.setVisibility(View.VISIBLE);
                     submitButton.setVisibility(View.INVISIBLE);
 
                     if (mLikely<0);
-                    else if (mLikely<50)
-                        ivGreen.setVisibility(View.VISIBLE);
-                    else if (mLikely<80)
-                        ivYellow.setVisibility(View.VISIBLE);
-                    else
-                        ivRed.setVisibility(View.VISIBLE);
+                    else if (mLikely<50) {
+                        submitButton.setBackgroundResource(R.drawable.button_green_background);
                         submitButton.setVisibility(View.VISIBLE);
+                    }
+                    else if (mLikely<80) {
+                        submitButton.setBackgroundResource(R.drawable.button_yellow_background);
+                        submitButton.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        submitButton.setBackgroundResource(R.drawable.button_red_background);
+                        submitButton.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         };
@@ -200,9 +187,9 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         toggleButtonGrabar.setVisibility(View.INVISIBLE);
 
 
-        textViewName.setOnKeyListener(new View.OnKeyListener() {
+        textViewState.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((textViewName.getText().toString().length()>0)&&(toggleButtonTrain.isChecked()))
+                if ((textViewState.getText().toString().length() > 0))
                     toggleButtonGrabar.setVisibility(View.VISIBLE);
                 else
                     toggleButtonGrabar.setVisibility(View.INVISIBLE);
@@ -217,40 +204,6 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
             }
         });
 
-        toggleButtonTrain.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (toggleButtonTrain.isChecked()) {
-                    textresult.setVisibility(View.VISIBLE);
-                    textViewName.setVisibility(View.VISIBLE);
-                    textresult.setText(getResources().getString(R.string.SFaceName));
-                    if (textViewName.getText().toString().length() > 0)
-                        toggleButtonGrabar.setVisibility(View.VISIBLE);
-
-
-                    ivGreen.setVisibility(View.INVISIBLE);
-                    ivYellow.setVisibility(View.INVISIBLE);
-                    ivRed.setVisibility(View.INVISIBLE);
-
-
-                } else {
-                    textState.setText(R.string.Straininig);
-                    textresult.setText("");
-                    textViewName.setVisibility(View.INVISIBLE);
-
-
-                    textresult.setText("");
-                    {
-                        toggleButtonGrabar.setVisibility(View.INVISIBLE);
-                        textViewName.setVisibility(View.INVISIBLE);
-                    }
-                    Toast.makeText(getApplicationContext(),getResources().getString(R.string.Straininig), Toast.LENGTH_LONG).show();
-                    personRecognizer.train();
-                    textState.setText(getResources().getString(R.string.SIdle));
-
-                }
-            }
-
-        });
 
 
 
@@ -278,37 +231,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                 }
             }
         });
-/*
-        buttonSearch.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
-                if (buttonSearch.isChecked())
-                {
-                    if (!personRecognizer.canPredict())
-                    {
-                        buttonSearch.setChecked(false);
-                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.SCanntoPredic), Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    textState.setText(getResources().getString(R.string.SSearching));
-                    toggleButtonGrabar.setVisibility(View.INVISIBLE);
-                    textViewName.setVisibility(View.INVISIBLE);
-                    faceState=SEARCHING;
-                    textresult.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    faceState=IDLE;
-                    textState.setText(getResources().getString(R.string.SIdle));
-                    toggleButtonGrabar.setVisibility(View.INVISIBLE);
-                    //toggleButtonTrain.setVisibility(View.VISIBLE);
-                    textViewName.setVisibility(View.INVISIBLE);
-                    textresult.setVisibility(View.INVISIBLE);
-
-                }
-            }
-        });
-*/
         boolean success=(new File(mPath)).mkdirs();
         if (!success)
         {
@@ -320,48 +243,55 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         //this is how we read in values sent by CommCare
         if(mBundle!=null) {
             action = mBundle.getString("recognize_action", null);
-            System.out.println("Action is: " + action);
             if(action.equals("register")){
                 _s = State.TRAIN;
                 caseId = mBundle.getString("case_id", null);
                 refreshView();
-                System.out.println("Case ID is: " + caseId);
             } else if(action.equals("lookup")){
                 _s = State.RECOGNIZE;
                 refreshView();
             }
         } else{
+            Toast.makeText(getApplicationContext(), "Launched from outside CommCare.", Toast.LENGTH_LONG).show();
             _s = State.TRAIN;
             caseId = "case_id_fake";
         }
     }
 
     private void startSearch(){
+
+        Toast.makeText(getApplicationContext(),"Recognizing...", Toast.LENGTH_LONG).show();
+
         if (!personRecognizer.canPredict())
         {
             //buttonSearch.setChecked(false);
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.SCanntoPredic), Toast.LENGTH_LONG).show();
             return;
         }
-        textState.setText(getResources().getString(R.string.SSearching));
         toggleButtonGrabar.setVisibility(View.INVISIBLE);
-        textViewName.setVisibility(View.INVISIBLE);
         faceState=SEARCHING;
-        textresult.setVisibility(View.VISIBLE);
+        textViewState.setVisibility(View.VISIBLE);
+    }
+
+    private void startTrain(){
+
+        Toast.makeText(getApplicationContext(),"Training...", Toast.LENGTH_LONG).show();
+
+        textViewState.setVisibility(View.VISIBLE);
+        if (textViewState.getText().toString().length() > 0)
+            toggleButtonGrabar.setVisibility(View.VISIBLE);
+
     }
 
     private void refreshView(){
         if(_s.equals(State.RECOGNIZE)){
 
-            toggleButtonTrain.setVisibility(View.GONE);
-            //buttonSearch.setVisibility(View.VISIBLE);
+            textViewState.setVisibility(View.VISIBLE);
 
         } else if (_s.equals(State.TRAIN)){
 
-            toggleButtonTrain.setVisibility(View.VISIBLE);
-            //buttonSearch.setVisibility(View.GONE);
-            textViewName.setVisibility(View.VISIBLE);
-            textViewName.setText(caseId);
+            textViewState.setVisibility(View.VISIBLE);
+            textViewState.setText(caseId);
 
         }
     }
@@ -380,8 +310,6 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                     
  
                     personRecognizer = new PersonRecognizer(mPath);
-                    String s = getResources().getString(R.string.Straininig);
-                    Toast.makeText(getApplicationContext(),s, Toast.LENGTH_LONG).show();
                     personRecognizer.load();
                     
                     try {
@@ -420,6 +348,8 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                 }
                 if(_s.equals(State.RECOGNIZE)) {
                     startSearch();
+                } else if(_s.equals(State.TRAIN)){
+                    startTrain();
                 }
                 break;
                 default:
@@ -517,7 +447,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
 
         Rect[] facesArray = faces.toArray();
         
-        if ((facesArray.length==1)&&(faceState==TRAINING)&&(countImages<MAXIMG)&&(!textViewName.getText().toString().isEmpty()))
+        if ((facesArray.length==1)&&(faceState==TRAINING)&&(countImages<MAXIMG)&&(!textViewState.getText().toString().isEmpty()))
         {
         
        
@@ -538,7 +468,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         mHandler.sendMessage(msg);
         if (countImages<MAXIMG)
         {
-        	personRecognizer.add(m, textViewName.getText().toString());
+        	personRecognizer.add(m, textViewState.getText().toString());
         	countImages++;
         }
 

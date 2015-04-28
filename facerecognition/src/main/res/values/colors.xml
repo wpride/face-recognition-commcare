@@ -19,4 +19,8 @@
     <color name="white">#FFFFFF</color>
     <color name="white_transparent_cc">#CCFFFFFF</color>
 
+    <color name="yellow_500">#FFFF00</color>
+    <color name="yellow_700">#FFFF66</color>
+    <color name="yellow_900">#FFFFB2</color>
+
 </resources>

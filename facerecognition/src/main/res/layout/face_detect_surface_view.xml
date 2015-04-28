@@ -1,127 +1,64 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="0.88"
-        android:orientation="vertical" >
 
-        <RelativeLayout
+    <TextView
+        android:id="@+id/textViewState"
+        android:layout_width="fill_parent"
+        android:layout_height="30dip"
+        android:layout_alignParentTop="true"
+        android:text="@string/SIdle"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RelativeLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="30dip"
+        android:layout_alignParentBottom="true">
+
+        <ToggleButton
+            android:id="@+id/toggleButtonGrabar"
+            style="@style/ActionButtonWhite"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.88" >
+            android:layout_alignParentLeft="true"
+            android:text="Grabar"
+            android:textOff="Rec"
+            android:textOn="Stop" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <org.opencv.javacv.facerecognition.Tutorial3View
-                    android:id="@+id/tutorial3_activity_java_surface_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.88" />
-
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <LinearLayout
+        <ImageButton
+            android:id="@+id/imageButton1"
+            style="@style/ActionButtonWhite"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_stat_camera" />
 
-            <TextView
-                android:id="@+id/textViewState"
-                android:layout_width="190dp"
-                android:layout_height="wrap_content"
-                android:text="@string/SIdle"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+        <Button
+            android:id="@+id/submitButton"
+            style="@style/ActionButtonWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="Submit" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_green" />
+    </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_yellow" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/linearLayout1"
+        android:layout_below="@id/textViewState">
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_red" />
+        <org.opencv.javacv.facerecognition.Tutorial3View
+            android:id="@+id/tutorial3_activity_java_surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-            </RelativeLayout>
+    </LinearLayout>
 
-        </LinearLayout>
-        
-		<LinearLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content" >
 
-		    <ToggleButton
-		        android:id="@+id/toggleButton1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="match_parent"
-		        android:layout_weight="0.07"
-		        android:text="@string/STrain"
-		        android:textOff="@string/STrain"
-		        android:textOn="@string/SStopTrain" />
-
-		    <TextView
-		        android:id="@+id/textView1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="0.71"
-		        android:text="@string/SFaceName"
-		        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-		    <TextView
-		        android:id="@+id/textViewName"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="1.76"
-		        android:maxLines="1"
-		        android:singleLine="true" >
-		    </TextView>
-
-		    <ToggleButton
-		        android:id="@+id/toggleButtonGrabar"
-		        android:layout_width="wrap_content"
-		        android:layout_height="match_parent"
-		        android:text="Grabar"
-		        android:textOff="Rec"
-		        android:textOn="Stop"
-                style="@style/ActionButtonWhite"/>
-
-            <Button
-                android:id="@+id/submitButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Submit"
-                style="@style/ActionButtonWhite"/>
-
-		    <ImageButton
-		        android:id="@+id/imageButton1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="0.73"
-		        android:src="@drawable/ic_stat_camera"
-                style="@style/ActionButtonWhite"/>
-
-		</LinearLayout>
-            
-    	</LinearLayout>
-    
-</LinearLayout>
+</RelativeLayout>
