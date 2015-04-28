@@ -167,7 +167,7 @@ public  class PersonRecognizer {
 		if (n[0] != -1)
 			return labelsFile.get(n[0]);
 		else
-			return "Unkown";
+			return "Unknown";
 	}
 
 

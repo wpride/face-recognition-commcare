@@ -18,13 +18,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
 
-                <Button
-                    android:id="@+id/buttonCat"
-                    android:layout_width="65dp"
-                    android:layout_height="68dp"
-                    android:text="@string/SViewAll"
-                    style="@style/ActionButtonWhite"/>
-
                 <org.opencv.javacv.facerecognition.Tutorial3View
                     android:id="@+id/tutorial3_activity_java_surface_view"
                     android:layout_width="match_parent"
@@ -94,25 +87,14 @@
 		        android:text="@string/SFaceName"
 		        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-		    <EditText
-		        android:id="@+id/editText1"
+		    <TextView
+		        android:id="@+id/textViewName"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_weight="1.76"
 		        android:maxLines="1"
 		        android:singleLine="true" >
-
-		        <requestFocus />
-		    </EditText>
-
-		    <ToggleButton
-		        android:id="@+id/buttonBuscar"
-		        android:layout_width="wrap_content"
-		        android:layout_height="match_parent"
-		        android:text="@string/SSearch"
-		        android:textOff="@string/SSearch"
-		        android:textOn="@string/SStopSearch"
-                style="@style/ActionButtonWhite"/>
+		    </TextView>
 
 		    <ToggleButton
 		        android:id="@+id/toggleButtonGrabar"
@@ -121,6 +103,13 @@
 		        android:text="Grabar"
 		        android:textOff="Rec"
 		        android:textOn="Stop"
+                style="@style/ActionButtonWhite"/>
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Submit"
                 style="@style/ActionButtonWhite"/>
 
 		    <ImageButton

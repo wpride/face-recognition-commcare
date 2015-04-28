@@ -2,6 +2,7 @@ package org.opencv.javacv.facerecognition;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -100,9 +102,10 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
     Handler mHandler;
   
     PersonRecognizer personRecognizer;
-    ToggleButton toggleButtonGrabar,toggleButtonTrain,buttonSearch;
+    ToggleButton toggleButtonGrabar,toggleButtonTrain;
     ImageView ivGreen,ivYellow,ivRed; 
     ImageButton imCamera;
+    Button submitButton;
     
     TextView textState;
     com.googlecode.javacv.cpp.opencv_contrib.FaceRecognizer faceRecognizer;
@@ -129,27 +132,27 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         Log.i(TAG, "called onCreate");
         super.onCreate(savedInstanceState);
 
-        Bundle mBundle = getIntent().getExtras();
-
-        //this is how we read in values sent by CommCare
-        if(mBundle!=null) {
-            action = mBundle.getString("recognize_action", null);
-            System.out.println("Action is: " + action);
-            if(action.equals("register")){
-                _s = State.TRAIN;
-                caseId = mBundle.getString("case_id", null);
-                System.out.println("Case ID is: " + caseId);
-            } else if(action.equals("lookup")){
-                _s = State.RECOGNIZE;
-            }
-        } else{
-            _s = State.TRAIN;
-            caseId = "case_id_fake";
-        }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.face_detect_surface_view);
+
+        textViewName = (TextView)findViewById(R.id.textViewName);
+        toggleButtonGrabar=(ToggleButton)findViewById(R.id.toggleButtonGrabar);
+        toggleButtonTrain=(ToggleButton)findViewById(R.id.toggleButton1);
+        textState= (TextView)findViewById(R.id.textViewState);
+        ivGreen=(ImageView)findViewById(R.id.imageView3);
+        ivYellow=(ImageView)findViewById(R.id.imageView4);
+        ivRed=(ImageView)findViewById(R.id.imageView2);
+        imCamera=(ImageButton)findViewById(R.id.imageButton1);
+        submitButton=(Button)findViewById(R.id.submitButton);
+        textresult = (TextView) findViewById(R.id.textView1);
+
+        ivGreen.setVisibility(View.INVISIBLE);
+        ivYellow.setVisibility(View.INVISIBLE);
+        ivRed.setVisibility(View.INVISIBLE);
+        textViewName.setVisibility(View.INVISIBLE);
+        textresult.setVisibility(View.INVISIBLE);
 
         mOpenCvCameraView = (Tutorial3View) findViewById(R.id.tutorial3_activity_java_surface_view);
 
@@ -158,8 +161,6 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         mPath=getFilesDir()+"/facerecogOCV/";
 
         labelsFile= new labels(mPath);
-
-        textresult = (TextView) findViewById(R.id.textView1);
 
         mHandler = new Handler() {
             @Override
@@ -180,6 +181,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                     ivGreen.setVisibility(View.INVISIBLE);
                     ivYellow.setVisibility(View.INVISIBLE);
                     ivRed.setVisibility(View.INVISIBLE);
+                    submitButton.setVisibility(View.INVISIBLE);
 
                     if (mLikely<0);
                     else if (mLikely<50)
@@ -188,24 +190,10 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                         ivYellow.setVisibility(View.VISIBLE);
                     else
                         ivRed.setVisibility(View.VISIBLE);
+                        submitButton.setVisibility(View.VISIBLE);
                 }
             }
         };
-        textViewName = (TextView)findViewById(R.id.textViewName);
-        toggleButtonGrabar=(ToggleButton)findViewById(R.id.toggleButtonGrabar);
-        buttonSearch=(ToggleButton)findViewById(R.id.buttonBuscar);
-        toggleButtonTrain=(ToggleButton)findViewById(R.id.toggleButton1);
-        textState= (TextView)findViewById(R.id.textViewState);
-        ivGreen=(ImageView)findViewById(R.id.imageView3);
-        ivYellow=(ImageView)findViewById(R.id.imageView4);
-        ivRed=(ImageView)findViewById(R.id.imageView2);
-        imCamera=(ImageButton)findViewById(R.id.imageButton1);
-
-        ivGreen.setVisibility(View.INVISIBLE);
-        ivYellow.setVisibility(View.INVISIBLE);
-        ivRed.setVisibility(View.INVISIBLE);
-        textViewName.setVisibility(View.INVISIBLE);
-        textresult.setVisibility(View.INVISIBLE);
 
 
 
@@ -223,12 +211,15 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
             }
         });
 
-
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                submitResults();
+            }
+        });
 
         toggleButtonTrain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (toggleButtonTrain.isChecked()) {
-                    buttonSearch.setVisibility(View.INVISIBLE);
                     textresult.setVisibility(View.VISIBLE);
                     textViewName.setVisibility(View.VISIBLE);
                     textresult.setText(getResources().getString(R.string.SFaceName));
@@ -246,8 +237,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                     textresult.setText("");
                     textViewName.setVisibility(View.INVISIBLE);
 
-                    buttonSearch.setVisibility(View.VISIBLE);
-                    ;
+
                     textresult.setText("");
                     {
                         toggleButtonGrabar.setVisibility(View.INVISIBLE);
@@ -288,7 +278,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                 }
             }
         });
-
+/*
         buttonSearch.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -311,33 +301,65 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                     faceState=IDLE;
                     textState.setText(getResources().getString(R.string.SIdle));
                     toggleButtonGrabar.setVisibility(View.INVISIBLE);
-                    toggleButtonTrain.setVisibility(View.VISIBLE);
+                    //toggleButtonTrain.setVisibility(View.VISIBLE);
                     textViewName.setVisibility(View.INVISIBLE);
                     textresult.setVisibility(View.INVISIBLE);
 
                 }
             }
         });
-
+*/
         boolean success=(new File(mPath)).mkdirs();
         if (!success)
         {
             Log.e("Error","Error creating directory");
         }
 
-        refreshView();
+        Bundle mBundle = getIntent().getExtras();
+
+        //this is how we read in values sent by CommCare
+        if(mBundle!=null) {
+            action = mBundle.getString("recognize_action", null);
+            System.out.println("Action is: " + action);
+            if(action.equals("register")){
+                _s = State.TRAIN;
+                caseId = mBundle.getString("case_id", null);
+                refreshView();
+                System.out.println("Case ID is: " + caseId);
+            } else if(action.equals("lookup")){
+                _s = State.RECOGNIZE;
+                refreshView();
+            }
+        } else{
+            _s = State.TRAIN;
+            caseId = "case_id_fake";
+        }
+    }
+
+    private void startSearch(){
+        if (!personRecognizer.canPredict())
+        {
+            //buttonSearch.setChecked(false);
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.SCanntoPredic), Toast.LENGTH_LONG).show();
+            return;
+        }
+        textState.setText(getResources().getString(R.string.SSearching));
+        toggleButtonGrabar.setVisibility(View.INVISIBLE);
+        textViewName.setVisibility(View.INVISIBLE);
+        faceState=SEARCHING;
+        textresult.setVisibility(View.VISIBLE);
     }
 
     private void refreshView(){
         if(_s.equals(State.RECOGNIZE)){
 
             toggleButtonTrain.setVisibility(View.GONE);
-            buttonSearch.setVisibility(View.VISIBLE);
+            //buttonSearch.setVisibility(View.VISIBLE);
 
         } else if (_s.equals(State.TRAIN)){
 
             toggleButtonTrain.setVisibility(View.VISIBLE);
-            buttonSearch.setVisibility(View.GONE);
+            //buttonSearch.setVisibility(View.GONE);
             textViewName.setVisibility(View.VISIBLE);
             textViewName.setText(caseId);
 
@@ -395,7 +417,11 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
 
                     mOpenCvCameraView.enableView();
               
-                } break;
+                }
+                if(_s.equals(State.RECOGNIZE)) {
+                    startSearch();
+                }
+                break;
                 default:
                 {
                     super.onManagerConnected(status);
@@ -532,6 +558,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
               mHandler.sendMessage(msg);
         	  
               textTochange = personRecognizer.predict(m);
+              caseId = textTochange;
               mLikely = personRecognizer.getProb();
         	  msg = new Message();
         	  msg.obj = textTochange;
@@ -542,6 +569,17 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
             Core.rectangle(mRgba, facesArray[i].tl(), facesArray[i].br(), FACE_RECT_COLOR, 3);
 
         return mRgba;
+    }
+
+    public void submitResults(){
+        Intent data = new Intent();
+        Bundle responses = new Bundle();
+        responses.putString("match_id", caseId);
+        data.putExtra("odk_intent_bundle", responses);
+        // this is the value that CommCare will use as the result of the intent question
+        data.putExtra("odk_intent_data", caseId);
+        setResult(Activity.RESULT_OK, data);
+        finish();
     }
 
 
