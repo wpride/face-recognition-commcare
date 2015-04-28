@@ -2,7 +2,6 @@ package org.opencv.javacv.facerecognition;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -14,8 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -97,14 +94,13 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
     private Tutorial3View   mOpenCvCameraView;
     private int mChooseCamera = backCam;
     
-    EditText text;
+    TextView textViewName;
     TextView textresult;
     Bitmap mBitmap;
     Handler mHandler;
   
     PersonRecognizer personRecognizer;
     ToggleButton toggleButtonGrabar,toggleButtonTrain,buttonSearch;
-    Button buttonCatalog;
     ImageView ivGreen,ivYellow,ivRed; 
     ImageButton imCamera;
     
@@ -138,12 +134,17 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         //this is how we read in values sent by CommCare
         if(mBundle!=null) {
             action = mBundle.getString("recognize_action", null);
+            System.out.println("Action is: " + action);
             if(action.equals("register")){
                 _s = State.TRAIN;
                 caseId = mBundle.getString("case_id", null);
+                System.out.println("Case ID is: " + caseId);
             } else if(action.equals("lookup")){
                 _s = State.RECOGNIZE;
             }
+        } else{
+            _s = State.TRAIN;
+            caseId = "case_id_fake";
         }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -153,7 +154,6 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         mOpenCvCameraView = (Tutorial3View) findViewById(R.id.tutorial3_activity_java_surface_view);
 
         mOpenCvCameraView.setCvCameraViewListener(this);
-
 
         mPath=getFilesDir()+"/facerecogOCV/";
 
@@ -191,8 +191,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                 }
             }
         };
-        text=(EditText)findViewById(R.id.editText1);
-        buttonCatalog=(Button)findViewById(R.id.buttonCat);
+        textViewName = (TextView)findViewById(R.id.textViewName);
         toggleButtonGrabar=(ToggleButton)findViewById(R.id.toggleButtonGrabar);
         buttonSearch=(ToggleButton)findViewById(R.id.buttonBuscar);
         toggleButtonTrain=(ToggleButton)findViewById(R.id.toggleButton1);
@@ -205,26 +204,17 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         ivGreen.setVisibility(View.INVISIBLE);
         ivYellow.setVisibility(View.INVISIBLE);
         ivRed.setVisibility(View.INVISIBLE);
-        text.setVisibility(View.INVISIBLE);
+        textViewName.setVisibility(View.INVISIBLE);
         textresult.setVisibility(View.INVISIBLE);
 
 
 
         toggleButtonGrabar.setVisibility(View.INVISIBLE);
 
-        buttonCatalog.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent i = new Intent(org.opencv.javacv.facerecognition.FdActivity.this,
-                        org.opencv.javacv.facerecognition.ImageGallery.class);
-                i.putExtra("path", mPath);
-                startActivity(i);
-            };
-        });
 
-
-        text.setOnKeyListener(new View.OnKeyListener() {
+        textViewName.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((text.getText().toString().length()>0)&&(toggleButtonTrain.isChecked()))
+                if ((textViewName.getText().toString().length()>0)&&(toggleButtonTrain.isChecked()))
                     toggleButtonGrabar.setVisibility(View.VISIBLE);
                 else
                     toggleButtonGrabar.setVisibility(View.INVISIBLE);
@@ -238,12 +228,11 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         toggleButtonTrain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (toggleButtonTrain.isChecked()) {
-                    textState.setText(getResources().getString(R.string.SEnter));
                     buttonSearch.setVisibility(View.INVISIBLE);
                     textresult.setVisibility(View.VISIBLE);
-                    text.setVisibility(View.VISIBLE);
+                    textViewName.setVisibility(View.VISIBLE);
                     textresult.setText(getResources().getString(R.string.SFaceName));
-                    if (text.getText().toString().length() > 0)
+                    if (textViewName.getText().toString().length() > 0)
                         toggleButtonGrabar.setVisibility(View.VISIBLE);
 
 
@@ -255,14 +244,14 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                 } else {
                     textState.setText(R.string.Straininig);
                     textresult.setText("");
-                    text.setVisibility(View.INVISIBLE);
+                    textViewName.setVisibility(View.INVISIBLE);
 
                     buttonSearch.setVisibility(View.VISIBLE);
                     ;
                     textresult.setText("");
                     {
                         toggleButtonGrabar.setVisibility(View.INVISIBLE);
-                        text.setVisibility(View.INVISIBLE);
+                        textViewName.setVisibility(View.INVISIBLE);
                     }
                     Toast.makeText(getApplicationContext(),getResources().getString(R.string.Straininig), Toast.LENGTH_LONG).show();
                     personRecognizer.train();
@@ -313,8 +302,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                     }
                     textState.setText(getResources().getString(R.string.SSearching));
                     toggleButtonGrabar.setVisibility(View.INVISIBLE);
-                    toggleButtonTrain.setVisibility(View.INVISIBLE);
-                    text.setVisibility(View.INVISIBLE);
+                    textViewName.setVisibility(View.INVISIBLE);
                     faceState=SEARCHING;
                     textresult.setVisibility(View.VISIBLE);
                 }
@@ -324,7 +312,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
                     textState.setText(getResources().getString(R.string.SIdle));
                     toggleButtonGrabar.setVisibility(View.INVISIBLE);
                     toggleButtonTrain.setVisibility(View.VISIBLE);
-                    text.setVisibility(View.INVISIBLE);
+                    textViewName.setVisibility(View.INVISIBLE);
                     textresult.setVisibility(View.INVISIBLE);
 
                 }
@@ -336,12 +324,22 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         {
             Log.e("Error","Error creating directory");
         }
+
+        refreshView();
     }
 
     private void refreshView(){
         if(_s.equals(State.RECOGNIZE)){
 
+            toggleButtonTrain.setVisibility(View.GONE);
+            buttonSearch.setVisibility(View.VISIBLE);
+
         } else if (_s.equals(State.TRAIN)){
+
+            toggleButtonTrain.setVisibility(View.VISIBLE);
+            buttonSearch.setVisibility(View.GONE);
+            textViewName.setVisibility(View.VISIBLE);
+            textViewName.setText(caseId);
 
         }
     }
@@ -493,7 +491,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
 
         Rect[] facesArray = faces.toArray();
         
-        if ((facesArray.length==1)&&(faceState==TRAINING)&&(countImages<MAXIMG)&&(!text.getText().toString().isEmpty()))
+        if ((facesArray.length==1)&&(faceState==TRAINING)&&(countImages<MAXIMG)&&(!textViewName.getText().toString().isEmpty()))
         {
         
        
@@ -514,7 +512,7 @@ public class FdActivity extends Activity implements CvCameraViewListener2 {
         mHandler.sendMessage(msg);
         if (countImages<MAXIMG)
         {
-        	personRecognizer.add(m, text.getText().toString());
+        	personRecognizer.add(m, textViewName.getText().toString());
         	countImages++;
         }
 
