@@ -1,138 +1,72 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="0.88"
-        android:orientation="vertical" >
 
-        <RelativeLayout
+    <TextView
+        android:id="@+id/textViewState"
+        android:layout_width="fill_parent"
+        android:layout_height="30dip"
+        android:layout_alignParentTop="true"
+        android:text="@string/SIdle"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RelativeLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="30dip"
+        android:layout_alignParentBottom="true">
+
+        <ToggleButton
+            android:id="@+id/toggleButtonGrabar"
+            style="@style/ActionButtonWhite"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.88" >
+            android:layout_alignParentLeft="true"
+            android:text="Grabar"
+            android:textOff="Rec"
+            android:textOn="Stop" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <Button
-                    android:id="@+id/buttonCat"
-                    android:layout_width="65dp"
-                    android:layout_height="68dp"
-                    android:text="@string/SViewAll"
-                    style="@style/ActionButtonWhite"/>
-
-                <org.opencv.javacv.facerecognition.Tutorial3View
-                    android:id="@+id/tutorial3_activity_java_surface_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.88" />
-
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <LinearLayout
+        <ImageButton
+            android:id="@+id/imageButton1"
+            style="@style/ActionButtonWhite"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_stat_camera" />
 
-            <TextView
-                android:id="@+id/textViewState"
-                android:layout_width="190dp"
-                android:layout_height="wrap_content"
-                android:text="@string/SIdle"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+        <Button
+            android:id="@+id/submitButton"
+            style="@style/ActionButtonWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="Submit" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+        <Button
+            android:id="@+id/syncButton"
+            style="@style/ActionButtonWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/submitButton"
+            android:text="Sync" />
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_green" />
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_yellow" />
+    </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_red" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/linearLayout1"
+        android:layout_below="@id/textViewState">
 
-            </RelativeLayout>
+        <org.opencv.javacv.facerecognition.Tutorial3View
+            android:id="@+id/tutorial3_activity_java_surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        </LinearLayout>
-        
-		<LinearLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content" >
+    </LinearLayout>
 
-		    <ToggleButton
-		        android:id="@+id/toggleButton1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="match_parent"
-		        android:layout_weight="0.07"
-		        android:text="@string/STrain"
-		        android:textOff="@string/STrain"
-		        android:textOn="@string/SStopTrain" />
 
-		    <TextView
-		        android:id="@+id/textView1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="0.71"
-		        android:text="@string/SFaceName"
-		        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-		    <EditText
-		        android:id="@+id/editText1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="1.76"
-		        android:maxLines="1"
-		        android:singleLine="true" >
-
-		        <requestFocus />
-		    </EditText>
-
-		    <ToggleButton
-		        android:id="@+id/buttonBuscar"
-		        android:layout_width="wrap_content"
-		        android:layout_height="match_parent"
-		        android:text="@string/SSearch"
-		        android:textOff="@string/SSearch"
-		        android:textOn="@string/SStopSearch"
-                style="@style/ActionButtonWhite"/>
-
-		    <ToggleButton
-		        android:id="@+id/toggleButtonGrabar"
-		        android:layout_width="wrap_content"
-		        android:layout_height="match_parent"
-		        android:text="Grabar"
-		        android:textOff="Rec"
-		        android:textOn="Stop"
-                style="@style/ActionButtonWhite"/>
-
-		    <ImageButton
-		        android:id="@+id/imageButton1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_weight="0.73"
-		        android:src="@drawable/ic_stat_camera"
-                style="@style/ActionButtonWhite"/>
-
-		</LinearLayout>
-            
-    	</LinearLayout>
-    
-</LinearLayout><!-- From: file:/Users/wpride1/face-recognition1/facerecognition/src/main/res/layout/face_detect_surface_view.xml -->
+</RelativeLayout><!-- From: file:/Users/wpride1/face-recognition1/facerecognition/src/main/res/layout/face_detect_surface_view.xml -->

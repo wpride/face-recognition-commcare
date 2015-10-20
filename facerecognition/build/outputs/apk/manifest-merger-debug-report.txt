@@ -37,13 +37,13 @@ ADDED from AndroidManifest.xml:12:9
 		ADDED from AndroidManifest.xml:15:19
 	android:name
 		ADDED from AndroidManifest.xml:12:19
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER+commcare.face.recognition.LAUNCH
+intent-filter#android.intent.action.MAIN+android.intent.category.DEFAULT+android.intent.category.LAUNCHER+org.opencv.javacv.facerecognition.LAUNCH
 ADDED from AndroidManifest.xml:16:13
 action#android.intent.action.MAIN
 ADDED from AndroidManifest.xml:17:17
 	android:name
 		ADDED from AndroidManifest.xml:17:25
-action#commcare.face.recognition.LAUNCH
+action#org.opencv.javacv.facerecognition.LAUNCH
 ADDED from AndroidManifest.xml:18:17
 	android:name
 		ADDED from AndroidManifest.xml:18:25
@@ -51,40 +51,40 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:19:17
 	android:name
 		ADDED from AndroidManifest.xml:19:27
-activity#org.opencv.javacv.facerecognition.ImageGallery
-ADDED from AndroidManifest.xml:23:9
-	android:screenOrientation
-		ADDED from AndroidManifest.xml:25:19
-	android:label
-		ADDED from AndroidManifest.xml:24:19
-	android:configChanges
-		ADDED from AndroidManifest.xml:26:19
-	android:name
-		ADDED from AndroidManifest.xml:23:19
-intent-filter#android.intent.action.VIEW+android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:27:9
-action#android.intent.action.VIEW
-ADDED from AndroidManifest.xml:28:3
-	android:name
-		ADDED from AndroidManifest.xml:28:11
 category#android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:20:17
+	android:name
+		ADDED from AndroidManifest.xml:20:27
+activity#org.opencv.javacv.facerecognition.ImageGallery
+ADDED from AndroidManifest.xml:24:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:26:19
+	android:label
+		ADDED from AndroidManifest.xml:25:19
+	android:configChanges
+		ADDED from AndroidManifest.xml:27:19
+	android:name
+		ADDED from AndroidManifest.xml:24:19
+intent-filter#android.intent.action.VIEW+android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:28:9
+action#android.intent.action.VIEW
 ADDED from AndroidManifest.xml:29:3
 	android:name
-		ADDED from AndroidManifest.xml:29:13
+		ADDED from AndroidManifest.xml:29:11
 supports-screens
-ADDED from AndroidManifest.xml:35:5
+ADDED from AndroidManifest.xml:36:5
 	android:resizeable
-		ADDED from AndroidManifest.xml:35:23
-	android:largeScreens
-		ADDED from AndroidManifest.xml:38:23
-	android:anyDensity
-		ADDED from AndroidManifest.xml:39:23
-	android:normalScreens
-		ADDED from AndroidManifest.xml:37:23
-	android:smallScreens
 		ADDED from AndroidManifest.xml:36:23
+	android:largeScreens
+		ADDED from AndroidManifest.xml:39:23
+	android:anyDensity
+		ADDED from AndroidManifest.xml:40:23
+	android:normalScreens
+		ADDED from AndroidManifest.xml:38:23
+	android:smallScreens
+		ADDED from AndroidManifest.xml:37:23
 uses-sdk
-ADDED from AndroidManifest.xml:41:5
+ADDED from AndroidManifest.xml:42:5
 MERGED from face-recognition1:openCVLibrary2410:unspecified:7:5
 MERGED from com.android.support:appcompat-v7:22.0.0:20:5
 MERGED from com.android.support:support-v4:22.0.0:20:5
@@ -92,34 +92,38 @@ MERGED from com.android.support:support-v4:22.0.0:20:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
 	android:minSdkVersion
-		ADDED from AndroidManifest.xml:41:15
+		ADDED from AndroidManifest.xml:42:15
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
 uses-permission#android.permission.CAMERA
-ADDED from AndroidManifest.xml:43:5
+ADDED from AndroidManifest.xml:44:5
 	android:name
-		ADDED from AndroidManifest.xml:43:22
+		ADDED from AndroidManifest.xml:44:22
 uses-feature#android.hardware.camera
-ADDED from AndroidManifest.xml:45:5
-	android:required
-		ADDED from AndroidManifest.xml:45:58
-	android:name
-		ADDED from AndroidManifest.xml:45:19
-uses-feature#android.hardware.camera.autofocus
 ADDED from AndroidManifest.xml:46:5
 	android:required
-		ADDED from AndroidManifest.xml:46:68
+		ADDED from AndroidManifest.xml:46:58
 	android:name
 		ADDED from AndroidManifest.xml:46:19
-uses-feature#android.hardware.camera.front
+uses-feature#android.hardware.camera.autofocus
 ADDED from AndroidManifest.xml:47:5
 	android:required
-		ADDED from AndroidManifest.xml:47:64
+		ADDED from AndroidManifest.xml:47:68
 	android:name
 		ADDED from AndroidManifest.xml:47:19
-uses-feature#android.hardware.camera.front.autofocus
+uses-feature#android.hardware.camera.front
 ADDED from AndroidManifest.xml:48:5
 	android:required
-		ADDED from AndroidManifest.xml:48:74
+		ADDED from AndroidManifest.xml:48:64
 	android:name
 		ADDED from AndroidManifest.xml:48:19
+uses-feature#android.hardware.camera.front.autofocus
+ADDED from AndroidManifest.xml:49:5
+	android:required
+		ADDED from AndroidManifest.xml:49:74
+	android:name
+		ADDED from AndroidManifest.xml:49:19
+uses-permission#org.commcare.dalvik.provider.cases.read
+ADDED from AndroidManifest.xml:51:5
+	android:name
+		ADDED from AndroidManifest.xml:51:22

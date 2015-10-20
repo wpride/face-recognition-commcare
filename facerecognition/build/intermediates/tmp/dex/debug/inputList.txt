@@ -1,8 +1,0 @@
-/Users/wpride1/face-recognition1/facerecognition/build/intermediates/classes/debug
-/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-337b307ebd184e05ceba71ac5f8183ce56e87851.jar
-/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/javacpp-0acb71a3164334ffe6eabc6925653f77304c569b.jar
-/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-eb766b4c391b88ab91a5a32fc3a0139d414b7f5b.jar
-/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/classes-20488f46b471759cb8e020a327f8c9b9b7592707.jar
-/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/classes-dd678a06cbc8c7eb936c2bf81c83b5f47b86e714.jar
-/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/classes-ec0d6c810e4ff0fb1854eb593b2a1e432f453d72.jar
-/Users/wpride1/face-recognition1/facerecognition/build/intermediates/pre-dexed/debug/javacv-5fbf6d1b348511941be6287a6d4ea658854b0005.jar
